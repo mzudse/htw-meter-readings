@@ -1,0 +1,42 @@
+version: '3.9'
+
+services:
+  influxdb:
+    image: influxdb:2.7.1
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=mydb
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=password
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3003:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: PqkC-X2Ya/kVGTRYnQZsjbM4,SNQmsUjUUXa
+      GF_USERS_ALLOW_SIGN_UP: 'false'
+    depends_on:
+      - influxdb
+    links:
+      - "influxdb:db"
+  serverws:
+    image: htwberlin/mdwvzaehlerstaende-server-ws:latest
+    build:
+      context: webservice
+    ports:
+      - "5002:5002"
+    depends_on:
+      - influxdb
+    links:
+      - "influxdb:db"
+    environment:
+      - INFLUXDB_URL=http://db:8086
+      - INFLUXDB_TOKEN=GOV2q2xi6URqjLA4MwU00Q2pZmXUpKI4KCwKV5zlSwRXrVrD3uKT8IXksWRK3Y1BF0NVH8YK4QmDhsKhGu8fBg==
+      - INFLUXDB_ORG=htw
+      - INFLUXDB_BUCKET=htw
+volumes:
+  grafana-data:
+  influxdb-data:
