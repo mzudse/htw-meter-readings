@@ -11,6 +11,7 @@ services:
     environment:
       - LD_LIBRARY_PATH=/opt/vc/lib
       - SERVER_WEBSERVICE=http://mzdev.talomation.de:5002/
+      - CLIENT_NAME=raspberrypi-keller
     devices:
       - /dev/vchiq:/dev/vchiq
       - /dev/vcsm:/dev/vcsm
