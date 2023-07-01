@@ -7,10 +7,10 @@ from PIL import Image
 import base64
 import requests
 
-cam_image_path = "/home/watcher_files/current_cam.png" # volume is mounted via docker compose
+cam_image_path = "/var/shared_client_volume/current_cam.png" # volume is mounted via docker compose
 cam_image_preview_path = "preview.png"
 cam_image_preview_settings_path = "settings_scrop_preview.png"
-crop_settings_file_path = "settings.json"
+crop_settings_file_path = "/var/shared_client_volume/settings.json"
 server_ws = os.environ.get("SERVER_WEBSERVICE")
 
 def get_crop_settings():
