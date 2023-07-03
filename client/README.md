@@ -4,6 +4,18 @@ Unter dem Client werden alle Dienste zusammengefasst, die auf dem Client, in die
 
 ## Getting started
 
+In der Datei *docker-compose.yml* müssen für die Container *watcher* und *clientws* noch die Umgebungsvariablen angepasst werden. Für den Watcher und den Client-Webservice muss die URL für den Server-Webservice angepasst werden und zusätzlich bei dem Watcher der Client-Name. Der Client-Name dient dabei der Identifikation des Datenpunktes in der InfluxDB.
+
+```yaml
+watcher:
+    environment:
+        - SERVER_WEBSERVICE=http://server-webservice.local:5002/
+        - CLIENT_NAME=raspberrypi-keller
+clientws:
+    environment:
+      - SERVER_WEBSERVICE=http://server-webservice.local:5002/
+```
+
 Alle Dienste können mit dem folgenden Befehl gestartet werden.
 ```console
 docker compose up
