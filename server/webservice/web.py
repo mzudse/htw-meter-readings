@@ -17,7 +17,6 @@ def do_ocr(file_name):
     img = Image.open(file_name).convert('L')
     ret,img = cv2.threshold(np.array(img), 125, 255, cv2.THRESH_BINARY)
     img = Image.fromarray(img.astype(np.uint8))
-    #img.save("debug_bw.png")
     r = pytesseract.image_to_string(img, config="--psm 7 -c tessedit_char_whitelist=0123456789")
     return r.strip() # remove new line
 

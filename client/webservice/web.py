@@ -7,15 +7,11 @@ from PIL import Image
 import base64
 import requests
 
-cam_image_path = "../watcher/current_cam.png"
-cam_image_preview_path = "../preview.png"
-cam_image_preview_settings_path = "../settings_scrop_preview.png"
-crop_settings_file_path = "../settings.json"
+cam_image_path = "/var/shared_client_volume/current_cam.png" # volume is mounted via docker compose
+cam_image_preview_path = "preview.png"
+cam_image_preview_settings_path = "settings_scrop_preview.png"
+crop_settings_file_path = "/var/shared_client_volume/settings.json"
 server_ws = os.environ.get("SERVER_WEBSERVICE")
-
-
-def get_current_img():
-    return 123 # todo PiCamera
 
 def get_crop_settings():
     if os.path.exists(crop_settings_file_path):
@@ -23,10 +19,11 @@ def get_crop_settings():
     else:
         return None
 
-def request_ocr(fileName):
-    with open(fileName, "rb") as image_file:
+# get ocr result for file
+def request_ocr(file_name):
+    with open(file_name, "rb") as file_image:
         o = {
-            "img_base64": base64.b64encode(image_file.read())
+            "img_base64": base64.b64encode(file_image.read())
         }
         r = requests.post(server_ws + '/ocr', json=o).json()
         return {

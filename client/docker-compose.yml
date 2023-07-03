@@ -7,10 +7,11 @@ services:
       context: watcher
     volumes:
       - /opt/vc:/opt/vc
-      - "watchershared:/var/shared_volume"
+      - "watchershared:/var/shared_client_volume"
     environment:
       - LD_LIBRARY_PATH=/opt/vc/lib
-      - SERVER_WEBSERVICE=http://mzdev.talomation.de:5002/
+      - SERVER_WEBSERVICE=http://server-webservice.local:5002/
+      - CLIENT_NAME=raspberrypi-keller
     devices:
       - /dev/vchiq:/dev/vchiq
       - /dev/vcsm:/dev/vcsm
@@ -19,11 +20,11 @@ services:
     build:
       context: webservice
     environment:
-      - SERVER_WEBSERVICE=http://mzdev.talomation.de:5002/
+      - SERVER_WEBSERVICE=http://server-webservice.local:5002/
     ports:
       - "5004:5004"
     volumes:
-      - "watchershared:/home/watcher_files"
+      - "watchershared:/var/shared_client_volume"
 
 volumes:
   watchershared:
