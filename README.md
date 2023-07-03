@@ -1,5 +1,4 @@
 # Zählerstände auswerten und in Grafana anzeigen
-
 Diese Projekt wurde im Rahmen des Moduls "Methoden der Wissensverarbeitung" an der HTW Berlin durchgeführt.
 
 
@@ -10,4 +9,8 @@ Diese Projekt wurde im Rahmen des Moduls "Methoden der Wissensverarbeitung" an d
 - Python3
 - Bash
 - JavaScript
+- Docker
 
+### Hardware
+- Raspberry PI 2
+- Raspberry PI Camera, sofern unterstützt von dem jeweiligen Raspberry PI.
