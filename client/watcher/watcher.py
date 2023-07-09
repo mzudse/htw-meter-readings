@@ -40,9 +40,10 @@ def crop_image_with_settings(image, settings):
 
 def ocr():
     with open(cam_image_name, "rb") as image_file:
+        b64 = base64.b64encode(crop_image_if_needed(image_file))
         o = {
             "client_name": client_name,
-            "img_base64": base64.b64encode(crop_image_if_needed(image_file))
+            "img_base64": b64.decode('utf-8')
         }
         r = requests.post(server_ws + '/ocr/save', json=o).json()
         print(r)

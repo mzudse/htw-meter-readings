@@ -22,8 +22,9 @@ def get_crop_settings():
 # get ocr result for file
 def request_ocr(file_name):
     with open(file_name, "rb") as file_image:
+        b64 = base64.b64encode(file_image.read())
         o = {
-            "img_base64": base64.b64encode(file_image.read())
+            "img_base64": b64.decode('utf-8')
         }
         r = requests.post(server_ws + '/ocr', json=o).json()
         return {
