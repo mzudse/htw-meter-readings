@@ -12,14 +12,23 @@ import influxdb_client, os, time
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 
+"""
+Perform OCR on a file
+"""
 def do_ocr(file_name):
-    # Grayscale image
+    # Grayscale image for better contrast
     img = Image.open(file_name).convert('L')
     ret,img = cv2.threshold(np.array(img), 125, 255, cv2.THRESH_BINARY)
     img = Image.fromarray(img.astype(np.uint8))
+    # Run Tesseract on image
+    #   Set Page Segmentation Mode = 7 - Treat the image as a single text line
+    #   Set char whitelist
     r = pytesseract.image_to_string(img, config="--psm 7 -c tessedit_char_whitelist=0123456789")
     return r.strip() # remove new line
 
+"""
+Convert a given value to an int. Also removes leading zeroes during that process.
+"""
 def convert_to_int(v):
     if not v or v.isdigit() is False:
         return None
@@ -27,6 +36,10 @@ def convert_to_int(v):
         v = v.lstrip("0") # remove leading 0
         return int(v)
 
+"""
+Takes an Base64 String and writes it to a file.
+Returns the filename
+"""
 def write_base64_to_image_file(base64_string):
     file_name = str(uuid.uuid4())
     image = open(file_name, "wb")
