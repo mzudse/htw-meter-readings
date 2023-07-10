@@ -1,5 +1,5 @@
 # Server
-Unter dem Server werden alle Dienste zusammengefasst, die auf dem Server. Dies kein ein lokaler, z.B. ein weiterer Raspberry PI sein, oder ein Server in einem Rechenzentrum.
+Unter dem Server werden alle Dienste zusammengefasst, die auf dem Server ausgeführt werden. Dies kann ein lokaler Server, z.B. ein weiterer Raspberry PI sein, oder ein Server in einem Rechenzentrum sein.
 
 ## Getting started
 Alle Dienste können mit dem folgenden Befehl gestartet werden.
@@ -27,16 +27,9 @@ Innerhalb von Grafana lassen sich Daten unter anderem aus den folgenden Datenque
 - Elasticsearch
 
 ## Docker
-Alle Dienste werden isoliert als Docker-Container gestartet. Das Image des Webservices wird über ein eigenes Dockerfile gebaut. Alle anderen Dienste (Grafana und InfluxDB) verwenden die offiziellen Images der Anbieter. Die Einstellungen befinden sich dafür in der Datei "docker-compose.yml".
+Alle Dienste werden isoliert als Docker-Container gestartet. Das Image des Webservices wird über ein eigenes Dockerfile gebaut. Alle anderen Dienste (Grafana und InfluxDB) verwenden die offiziellen Images der Anbieter. Die Einstellungen befinden sich dafür in der Datei *docker-compose.yml*.
 
 Docker Images:
 - htwberlin/mdwvzaehlerstaende-server-ws
 - grafana/grafana:10.0.1
 - influxdb:2.7.1
-
-### Docker-Compose
-Damit innerhalb des Docker-Containers des Watcher-Dienstes auf den Kamera des Raspberry PI zugeriffen werden kann, muss der Zugriff erlaubt werden. Dazu werden Die Geräte "/dev/vchiq" und "/dev/vcsm", sowie das Verzeichnis "/opt/vc" in der docker-compose.yml gemapped werden. 
-
-Damit auf Dateien, wie Einstellungen oder Bilddateien, von beiden Containern zugeriffen werden können, existiert das Volume "/var/shared_client_files".
-
-Außerdem wurde mit dem Script "docker_compose_start.sh" die Möglichkeit geschaffen vor Ausführung des Docker-Compose-Befehls zu überprüfen, ob eine Kamera mit dem Raspberry PI verbunden ist. Dadurch lässt sich dieser mögliche Fehler vor Ausführung der einzelnen Docker-Container aufspüren.

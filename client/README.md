@@ -1,10 +1,10 @@
 # Client
 
-Unter dem Client werden alle Dienste zusammengefasst, die auf dem Client, in diesem Fall ein Raspberry PI, ausgeführt werden.
+Unter dem Client werden alle Dienste zusammengefasst, die auf dem Client, in diesem Fall einem Raspberry PI, ausgeführt werden.
 
 ## Getting started
 
-In der Datei *docker-compose.yml* müssen für die Container *watcher* und *clientws* noch die Umgebungsvariablen angepasst werden. Für den Watcher und den Client-Webservice muss die URL für den Server-Webservice angepasst werden und zusätzlich bei dem Watcher der Client-Name. Der Client-Name dient dabei der Identifikation des Datenpunktes in der InfluxDB.
+In der Datei *docker-compose.yml* müssen für die Container *watcher* und *clientws* die Umgebungsvariablen angepasst werden. Für den Watcher und den Client-Webservice muss die URL für den Server-Webservice angepasst werden und zusätzlich bei dem Watcher der Client-Name. Der Client-Name dient dabei der Identifikation des Datenpunktes in der InfluxDB.
 
 ```yaml
 watcher:
@@ -27,14 +27,14 @@ docker compose up
 
 
 ## Docker
-Alle Dienste werden isoliert als Docker-Container gestartet. Dazu enthält jeder Dienst ein eigenes Dockerfile um das jeweilige Image zu bauen. Alle Dienste können mit Docker-Compose gestaretet werden. Die Einstellungen befinden sich dafür in der Datei "docker-compose.yml".
+Alle Dienste werden isoliert als Docker-Container gestartet. Dazu enthält jeder Dienst ein eigenes Dockerfile, um das jeweilige Image zu bauen. Alle Dienste können mit Docker-Compose gestartet werden. Die Einstellungen dafür befinden sich in der Datei "docker-compose.yml".
 
 Docker Images:
 - htwberlin/mdwvzaehlerstaende-client-watcher
 - htwberlin/mdwvzaehlerstaende-client-ws
 
 ### Docker-Compose
-Damit innerhalb des Docker-Containers des Watcher-Dienstes auf den Kamera des Raspberry PI zugeriffen werden kann, muss der Zugriff erlaubt werden. Dazu werden Die Geräte "/dev/vchiq" und "/dev/vcsm", sowie das Verzeichnis "/opt/vc" in der docker-compose.yml gemapped werden. 
+Damit innerhalb des Docker-Containers des Watcher-Dienstes auf die Kamera des Raspberry PI zugeriffen werden kann, muss der Zugriff auf diese erlaubt werden. Dazu werden Die Geräte "/dev/vchiq" und "/dev/vcsm", sowie das Verzeichnis "/opt/vc" in der docker-compose.yml eingebunden. 
 
 Damit auf Dateien, wie Einstellungen oder Bilddateien, von beiden Containern zugeriffen werden können, existiert das Volume "/var/shared_client_files".
 
