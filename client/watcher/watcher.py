@@ -8,7 +8,7 @@ import json
 from io import BytesIO
 from picamera import PiCamera
 
-cam_image_name = "current_cam.png"
+cam_image_name = "/var/shared_client_volume/current_cam.png"
 server_ws = os.environ.get("SERVER_WEBSERVICE")
 client_name = os.environ.get("CLIENT_NAME")
 crop_settings_file_path = "/var/shared_client_volume/settings.json"
