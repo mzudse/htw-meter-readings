@@ -7,6 +7,15 @@ Alle Dienste können mit dem folgenden Befehl gestartet werden.
 docker compose up
 ```
 
+Über die API kann der OCR-Prozess durchgeführt werden.
+```console
+IMG_BASE64=$(base64 example.png -w 0)
+# With save
+curl -X POST http://localhost:5002/ocr/save -H 'Content-Type: application/json' -d '{"client_name": "raspberrypi_keller", "img_base64": "'$IMG_BASE64'"}'
+# Without save, just the result
+curl -X POST http://localhost:5002/ocr -H 'Content-Type: application/json' -d '{"client_name": "raspberrypi_keller", "img_base64": "'$IMG_BASE64'"}'
+```
+
 **Kein Docker installiert?**
 [Anleitung zum Installieren von Docker auf Raspberry OS](https://docs.docker.com/engine/install/raspbian/)
 
