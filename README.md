@@ -1,4 +1,7 @@
 # Zählerstände auswerten und in Grafana anzeigen
+Projekt im Rahmen des Moduls "Methoden der Wissensverarbeitung" an der Hochschule für Technik und Wirtschaft Berlin.
+
+
 Das Ziel dieses Projektes ist es, Zählerstände, z.B. einen Stromzählerstand automatisiert
 abzulesen, zu verarbeiten und im Anschluss auszuwerten. Die erfassten Daten können so
 verwendet werden, um Auswertungen zu erstellen oder um Korrelationen mit anderen Daten
